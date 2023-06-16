@@ -35,5 +35,13 @@ describe('Processor', () => {
 
       strictEqual(result, examples.multiImports.content)
     })
+
+    it('should process deep imports', async () => {
+      const processor = new Processor()
+
+      const result = await processor.process('./test/support/import-deep.md')
+
+      strictEqual(result, examples.importDeep.content)
+    })
   })
 })

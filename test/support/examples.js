@@ -1,7 +1,7 @@
 const multiBlock = (() => {
   const blocks = [{
     header: 'Header 1',
-    level: '#',
+    level: 1,
     lines: [
       '# Header 1',
       'First line of the body of header 1',
@@ -9,7 +9,7 @@ const multiBlock = (() => {
     ]
   }, {
     header: 'Header 1.1',
-    level: '##',
+    level: 2,
     lines: [
       '## Header 1.1',
       'First line of the body of header 1.1',
@@ -31,7 +31,7 @@ const multiImports = (() => {
     ...multiBlock.blocks,
     {
       header: 'Header 2',
-      level: '#',
+      level: 1,
       lines: [
         '# Header 2',
         'First line of the body of header 2',
@@ -39,7 +39,7 @@ const multiImports = (() => {
       ]
     }, {
       header: 'Header 2.1',
-      level: '##',
+      level: 2,
       lines: [
         '## Header 2.1',
         'First line of the body of header 2.1',
@@ -58,7 +58,10 @@ const multiImports = (() => {
   }
 })()
 
+const importDeep = multiImports
+
 export {
+  importDeep,
   multiBlock,
   multiImports
 }

@@ -91,6 +91,42 @@ describe('Markdown', () => {
     })
   })
 
+  describe('.getAll', () => {
+    it('should be a method', () => {
+      const markdown = new Markdown()
+
+      strictEqual(typeof markdown.getAll, 'function')
+    })
+
+    it('should return all blocks linked to the matching header', () => {
+      const markdown = new Markdown()
+        .append({ header: 'abc' })
+        .append({ header: 'def', level: 1 })
+        .append({ header: 'def 1', level: 2 })
+        .append({ header: 'def 1.1', level: 3 })
+        .append({ header: 'def 2', level: 2 })
+        .append({ header: 'ghi' })
+
+      const result = markdown.getAll('def', { deep: true })
+
+      strictEqual(Array.isArray(result), true)
+      strictEqual(result.length, 4)
+      strictEqual(result[0].header, 'def')
+      strictEqual(result[1].header, 'def 1')
+      strictEqual(result[2].header, 'def 1.1')
+      strictEqual(result[3].header, 'def 2')
+    })
+
+    it('should return an empty Array no matching block was found', () => {
+      const markdown = new Markdown()
+
+      const result = markdown.getAll('def')
+
+      strictEqual(Array.isArray(result), true)
+      strictEqual(result.length, 0)
+    })
+  })
+
   describe('.parse', () => {
     it('should be a method', () => {
       const markdown = new Markdown()
