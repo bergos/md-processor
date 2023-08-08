@@ -155,7 +155,7 @@ describe('Markdown', () => {
     })
 
     it('should parse the given file', async () => {
-      const markdown = await Markdown.load('./test/support/multiBlock.md')
+      const markdown = await Markdown.load('./test/support/multi-block.md')
 
       strictEqual(markdown.blocks[0].header, examples.multiBlock.blocks[0].header)
       strictEqual(markdown.blocks[0].level, examples.multiBlock.blocks[0].level)

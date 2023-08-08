@@ -1,4 +1,4 @@
-@[import{Header 1,deep}](multi-block.md)
+@[import{Header 1,deep,depth=+2}](multi-block.md)
 # Header 2
 First line of the body of header 2
 Second line of the body of header 2

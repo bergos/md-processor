@@ -20,9 +20,12 @@ nxp md-processor input.md > output.md
 Sections of other markdown files can be imported like this:
 
 ```markdown
-@[import{section}](filename)
+@[import{section,deep,depth=x}](filename)
 ```
 
-- `section`: The full header of the section to import
+- `section`: The full header of the section to import.
+- `deep`: If given, the nested blocks will be imported.
+- `depth`: Change the level of the headers by adding `x`.
+  `x` can be positive or negative.
 - `filename`: The path to the markdown file to import.
   The path is relative to the input file.

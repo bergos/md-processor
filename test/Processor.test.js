@@ -31,7 +31,7 @@ describe('Processor', () => {
     it('should process all imports', async () => {
       const processor = new Processor()
 
-      const result = await processor.process('./test/support/multiImports.md')
+      const result = await processor.process('./test/support/multi-imports.md')
 
       strictEqual(result, examples.multiImports.content)
     })
@@ -42,6 +42,22 @@ describe('Processor', () => {
       const result = await processor.process('./test/support/import-deep.md')
 
       strictEqual(result, examples.importDeep.content)
+    })
+
+    it('should process deep with decreasing depth change', async () => {
+      const processor = new Processor()
+
+      const result = await processor.process('./test/support/import-deep-change-minus.md')
+
+      strictEqual(result, examples.importDeepChangeMinus.content)
+    })
+
+    it('should process deep with increasing depth change', async () => {
+      const processor = new Processor()
+
+      const result = await processor.process('./test/support/import-deep-change-plus.md')
+
+      strictEqual(result, examples.importDeepChangePlus.content)
     })
   })
 })
