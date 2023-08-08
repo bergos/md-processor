@@ -1,9 +1,20 @@
+function blocksToContent (blocks) {
+  return blocks.map(block => {
+    let headerLine = ''
+
+    if (block.level > 0) {
+      headerLine = `${'#'.repeat(block.level)} ${block.header}\n`
+    }
+
+    return `${headerLine}${block.lines.join('\n')}`
+  }).join('\n')
+}
+
 const multiBlock = (() => {
   const blocks = [{
     header: 'Header 1',
     level: 1,
     lines: [
-      '# Header 1',
       'First line of the body of header 1',
       'Second line of the body of header 1'
     ]
@@ -11,7 +22,6 @@ const multiBlock = (() => {
     header: 'Header 1.1',
     level: 2,
     lines: [
-      '## Header 1.1',
       'First line of the body of header 1.1',
       'Second line of the body of header 1.1'
     ]
@@ -19,10 +29,7 @@ const multiBlock = (() => {
 
   return {
     blocks,
-    content: [
-      blocks[0].lines.join('\n'),
-      blocks[1].lines.join('\n')
-    ].join('\n')
+    content: blocksToContent(blocks)
   }
 })()
 
@@ -33,7 +40,6 @@ const multiImports = (() => {
       header: 'Header 2',
       level: 1,
       lines: [
-        '# Header 2',
         'First line of the body of header 2',
         'Second line of the body of header 2'
       ]
@@ -41,7 +47,6 @@ const multiImports = (() => {
       header: 'Header 2.1',
       level: 2,
       lines: [
-        '## Header 2.1',
         'First line of the body of header 2.1',
         'Second line of the body of header 2.1'
       ]
@@ -49,19 +54,69 @@ const multiImports = (() => {
 
   return {
     blocks,
-    content: [
-      blocks[0].lines.join('\n'),
-      blocks[1].lines.join('\n'),
-      blocks[2].lines.join('\n'),
-      blocks[3].lines.join('\n')
-    ].join('\n')
+    content: blocksToContent(blocks)
   }
 })()
 
 const importDeep = multiImports
 
+const importDeepChangeMinus = (() => {
+  const blocks = [
+    {
+      level: 0,
+      lines: [
+        'First line of the body of header 1',
+        'Second line of the body of header 1'
+      ]
+    }, {
+      header: 'Header 1.1',
+      level: 1,
+      lines: [
+        'First line of the body of header 1.1',
+        'Second line of the body of header 1.1'
+      ]
+    },
+    importDeep.blocks[2],
+    importDeep.blocks[3]
+  ]
+
+  return {
+    blocks,
+    content: blocksToContent(blocks)
+  }
+})()
+
+const importDeepChangePlus = (() => {
+  const blocks = [
+    {
+      header: 'Header 1',
+      level: 3,
+      lines: [
+        'First line of the body of header 1',
+        'Second line of the body of header 1'
+      ]
+    }, {
+      header: 'Header 1.1',
+      level: 4,
+      lines: [
+        'First line of the body of header 1.1',
+        'Second line of the body of header 1.1'
+      ]
+    },
+    importDeep.blocks[2],
+    importDeep.blocks[3]
+  ]
+
+  return {
+    blocks,
+    content: blocksToContent(blocks)
+  }
+})()
+
 export {
   importDeep,
+  importDeepChangeMinus,
+  importDeepChangePlus,
   multiBlock,
   multiImports
 }
