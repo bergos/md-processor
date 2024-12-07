@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/bergos/md-processor",
   "dependencies": {
-    "commander": "^10.0.1"
+    "commander": "^12.1.0"
   },
   "devDependencies": {
     "c8": "^10.1.2",
