@@ -1,6 +1,6 @@
 {
   "name": "md-processor",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A preprocessor for markdown files",
   "type": "module",
   "main": "index.js",
